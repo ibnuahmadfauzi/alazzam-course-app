@@ -23,9 +23,7 @@
                         <form action="/login" method="POST">
                             @csrf
                             @if($errors->any())
-                                <div class="alert alert-danger">
                                     {!! $errors->first() !!}
-                                </div>
                             @endif
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username :</label>

@@ -19,10 +19,11 @@ class AdministratorSeeder extends Seeder
     {
         Administrator::truncate();
         DB::table('administrator')->insert([
-            'username'      => 'administrator',
-            'password'      => Crypt::encrypt('administrator'),
-            'created_at'    => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at'    => Carbon::now()->format('Y-m-d H:i:s'),
+            'administrator_id'  => 'A' . rand(00000, 99999),
+            'username'          => 'administrator',
+            'password'          => Crypt::encrypt('administrator'),
+            'created_at'        => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at'        => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }
 }
