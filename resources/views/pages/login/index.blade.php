@@ -18,7 +18,15 @@
                     </div>
                     <hr>
                     <div>
-                        <form>
+
+                        {{-- Login Form --}}
+                        <form action="/login" method="POST">
+                            @csrf
+                            @if($errors->any())
+                                <div class="alert alert-danger">
+                                    {!! $errors->first() !!}
+                                </div>
+                            @endif
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username :</label>
                                 <input type="text" id="username" name="username" placeholder="Masukkan username ..." class="form-control" autofocus required>
@@ -31,6 +39,8 @@
                                 <button type="submit" class="btn btn-outline-primary fw-bold col-lg-4"><i class="fa fa-sign-in" aria-hidden="true"></i> Masuk Akun</button>
                             </div>
                         </form>
+                        {{-- end Login Form --}}
+
                     </div>
                 </div>
                 <div class="card-footer text-center text-secondary fw-bold">
