@@ -12,6 +12,16 @@ class LoginController extends Controller
 
     public function index()
     {
+        // Start Session
+        session_start();
+
+        // Check if the user is logged in
+        if(isset($_SESSION['login'])) {
+            if($_SESSION['login']) {
+                return redirect('/dashboard');
+            }
+        }
+
         return view('pages.login.index');
     }
 
@@ -30,7 +40,7 @@ class LoginController extends Controller
                     $_SESSION['login'] = true;
                     $_SESSION['account_role'] = 'administrator';
                     $_SESSION['account_id'] = $val->administrator_id;
-                    dd('Login Berhasil | ' . $_SESSION['account_role'] . ' | ' . $_SESSION['account_id']);
+                    return redirect('/dashboard');
                 }
             }
         }
@@ -48,7 +58,7 @@ class LoginController extends Controller
         // Delete All Session
         session_destroy();
 
-        return Redirect::back()->withErrors(['msg' => '<div class="alert alert-info"><strong>Logout Berhasil!</strong> Silahkan isi Username dan Password untuk masuk kembali</div>']);
+        return redirect('/login')->withErrors(['msg' => '<div class="alert alert-info"><strong>Logout Berhasil!</strong> Silahkan isi Username dan Password untuk masuk kembali</div>']);
     }
 
 }

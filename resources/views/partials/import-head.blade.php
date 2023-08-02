@@ -19,3 +19,7 @@
 {{-- Import Font Awesome --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {{-- end Import Font Awesome --}}
+
+{{-- Import DataTable --}}
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+{{-- end Import DataTable --}}
