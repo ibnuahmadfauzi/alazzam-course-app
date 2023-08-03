@@ -28,7 +28,7 @@
                             </td>
                             <td>{{ $kuis->judul_kuis }}</td>
                             <td class="text-center">
-                                <a href="" class="btn btn-outline-success"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a href="/kuis/{{ $kuis->kuis_id }}/edit" class="btn btn-outline-success"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                 <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteKuis{{ $kuis->id }}Modal"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             </td>
                         </tr>
