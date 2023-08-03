@@ -26,3 +26,5 @@ Route::post('/kuis/drop', [KuisController::class, 'destroy']);
 Route::post('/kuis/soal/store', [KuisController::class, 'soalStore']);
 Route::post('/kuis/soal/drop', [KuisController::class, 'soalDestroy']);
 Route::post('/kuis/soal/update-process', [KuisController::class, 'soalUpdate']);
+Route::post('/kuis/play', [KuisController::class, 'playKuis']);
+Route::post('/kuis/play/submit', [KuisController::class, 'playKuisSubmit']);

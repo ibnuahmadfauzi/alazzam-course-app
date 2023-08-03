@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Whoops\Run;
 
 class KuisController extends Controller
 {
@@ -20,10 +21,17 @@ class KuisController extends Controller
         // Check if the user is logged in
         if(isset($_SESSION['login'])) {
             if($_SESSION['login']) {
-                $data_kuis = Kuis::orderBy('id', 'desc')->get();
-                return view('pages.kuis.index', [
-                    'data_kuis' => $data_kuis,
-                ]);
+                if($_SESSION['account_role'] === 'administrator') {
+                    $data_kuis = Kuis::orderBy('id', 'desc')->get();
+                    return view('pages.kuis.index', [
+                        'data_kuis' => $data_kuis,
+                    ]);
+                } else {
+                    $data_kuis = Kuis::orderBy('id', 'desc')->where('status', 'aktif')->get();
+                    return view('pages.kuis.index-siswa', [
+                        'data_kuis' => $data_kuis,
+                    ]);
+                }
             }
         }
 
@@ -133,6 +141,55 @@ class KuisController extends Controller
 
         // return to kuis page
         return redirect("/kuis/$request->kuis_id/edit")->withErrors(['msg' => '<div class="alert alert-info">Data soal <strong>berhasil dihapus!</strong></div>']);
+    }
+
+    public function playKuis(Request $request)
+    {
+        $kuis = Kuis::where('id', $request->id)->get();
+        foreach ($kuis as $val) {
+            if(Crypt::decrypt($val->password) === $request->password) {
+                $data_kuis = Kuis::firstWhere('id', $request->id);
+                $semua_soal = DB::table('soal')
+                    ->join('kuis', 'kuis.id', '=', 'soal.kuis_id')
+                    ->select('soal.*')
+                    ->get();
+                $data_soal = $semua_soal->where('kuis_id', $data_kuis->id);
+                return view('pages.kuis.play', [
+                    'data_kuis' => $data_kuis,
+                    'data_soal' => $data_soal,
+                ]);
+            }
+        }
+
+        // return to kuis page
+        return redirect("/kuis")->withErrors(['msg' => '<div class="alert alert-danger"><strong>Gagal akses!</strong> password yang kamu gunakan tidak sesuai</div>']);
+    }
+
+    public function playKuisSubmit(Request $request)
+    {
+        $semua_soal = Soal::get();
+        $count = 1;
+        $trueAnswer = 0;
+        $my_looping = true;
+        while($my_looping) {
+            if(isset($request["id_soal_ke_$count"])) {
+                foreach($semua_soal as $soal) {
+                    if($soal->id == $request["id_soal_ke_$count"]) {
+                        if($soal->jawaban_benar == $request["jawaban_soal_ke_$count"]) {
+                            $trueAnswer++;
+                        }
+                    }
+                }
+            } else {
+                $my_looping = false;
+            }
+            $count++;
+        }
+        $soalCount = $count/2;
+        $score = (100 / $soalCount) * $trueAnswer;
+        dump($soalCount);
+        dump($trueAnswer);
+        dump($score);
     }
 
 }

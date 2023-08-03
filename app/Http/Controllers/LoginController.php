@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrator;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
@@ -40,6 +41,21 @@ class LoginController extends Controller
                     $_SESSION['login'] = true;
                     $_SESSION['account_role'] = 'administrator';
                     $_SESSION['account_id'] = $val->administrator_id;
+                    return redirect('/dashboard');
+                }
+            }
+        }
+
+        // get siswa table value
+        $user = Siswa::get();
+
+        // loop siswa table value and check login account
+        foreach($user as $val) {
+            if($request->username === $val->username) {
+                if($request->password === Crypt::decrypt($val->password)) {
+                    $_SESSION['login'] = true;
+                    $_SESSION['account_role'] = 'siswa';
+                    $_SESSION['account_id'] = $val->siswa_id;
                     return redirect('/dashboard');
                 }
             }

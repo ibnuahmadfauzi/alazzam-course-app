@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Soal;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,7 @@ class SoalSeeder extends Seeder
      */
     public function run()
     {
+        Soal::truncate();
         DB::table('soal')->insert([
             'soal_id'       => 'S' . rand(00000, 99999),
             'kuis_id'       => '1',
