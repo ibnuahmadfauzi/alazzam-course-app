@@ -145,6 +145,8 @@ class KuisController extends Controller
 
     public function playKuis(Request $request)
     {
+        session_start();
+
         $kuis = Kuis::where('id', $request->id)->get();
         foreach ($kuis as $val) {
             if(Crypt::decrypt($val->password) === $request->password) {
@@ -185,11 +187,13 @@ class KuisController extends Controller
             }
             $count++;
         }
-        $soalCount = $count/2;
+        $soalCount = $count;
         $score = (100 / $soalCount) * $trueAnswer;
         dump($soalCount);
         dump($trueAnswer);
         dump($score);
+        dump($request->judul_kuis);
+        dump($request->siswa_id);
     }
 
 }

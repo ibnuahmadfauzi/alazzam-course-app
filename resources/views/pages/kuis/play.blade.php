@@ -27,6 +27,8 @@
                             </div>
                             <div class="card-body">
                                 <input type="hidden" name="id_soal_ke_{{ $loop->iteration }}" value="{{ $soal->id }}">
+                                <input type="hidden" name="judul_kuis" value="{{ $data_kuis->judul_kuis }}">
+                                <input type="hidden" name="siswa_id" value="{{ $_SESSION['account_id'] }}">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="jawaban_soal_ke_{{ $loop->iteration }}" value="jawaban_1">
                                     <label class="form-check-label">
