@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kuis;
+use App\Models\Nilai;
 use App\Models\Soal;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -169,31 +170,69 @@ class KuisController extends Controller
 
     public function playKuisSubmit(Request $request)
     {
-        $semua_soal = Soal::get();
+        session_start();
+
+        $data_soal = Soal::where('kuis_id', $request->kuis_id)->get();
+
         $count = 1;
-        $trueAnswer = 0;
-        $my_looping = true;
-        while($my_looping) {
+        $status_looping = true;
+        $jawaban_benar = 0;
+        while($status_looping) {
             if(isset($request["id_soal_ke_$count"])) {
-                foreach($semua_soal as $soal) {
+                foreach($data_soal as $soal) {
                     if($soal->id == $request["id_soal_ke_$count"]) {
                         if($soal->jawaban_benar == $request["jawaban_soal_ke_$count"]) {
-                            $trueAnswer++;
+                            $jawaban_benar++;
                         }
                     }
                 }
+                $count++;
             } else {
-                $my_looping = false;
+                $status_looping = false;
             }
-            $count++;
         }
-        $soalCount = $count;
-        $score = (100 / $soalCount) * $trueAnswer;
-        dump($soalCount);
-        dump($trueAnswer);
-        dump($score);
-        dump($request->judul_kuis);
-        dump($request->siswa_id);
+
+        $jumlah_soal = $count-1;
+        $score = (100/$jumlah_soal) * $jawaban_benar;
+        $score_fix = number_format((float)$score, 2, '.', '');
+        $judul_kuis = $request->judul_kuis;
+
+        // Store kuis data from request
+        Nilai::create([
+            'nilai_id'      => 'N' . rand(00000, 99999),
+            'siswa_id'      => $_SESSION['account_id'],
+            'judul_kuis'    => $judul_kuis,
+            'jumlah_soal'   => $jumlah_soal,
+            'jumlah_benar'  => $jawaban_benar,
+            'nilai'         => $score_fix,
+        ]);
+
+        // return to kuis page
+        return redirect('/kuis')->withErrors(['msg' => '<div class="alert alert-info"><strong>Kuis selesai dikerjakan!</strong> silahkan lihat hasilnya di halaman <a href="/nilai">Nilai</a></div>']);
+
+
+
+        // $semua_soal = Soal::get();
+        // $count = 1;
+        // $trueAnswer = 0;
+        // $my_looping = true;
+        // while($my_looping) {
+        //     if(isset($request["id_soal_ke_$count"])) {
+        //         foreach($semua_soal as $soal) {
+        //             if($soal->id == $request["id_soal_ke_$count"]) {
+        //                 if($soal->jawaban_benar == $request["jawaban_soal_ke_$count"]) {
+        //                     $trueAnswer++;
+        //                 }
+        //             }
+        //         }
+        //     } else {
+        //         $my_looping = false;
+        //     }
+        //     $count++;
+        // }
+        // $soalCount = $count;
+        // $score = (100 / $soalCount) * $trueAnswer;
+        // dump($request);
     }
 
 }

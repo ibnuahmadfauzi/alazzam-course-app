@@ -17,11 +17,11 @@ class CreateNilaiTable extends Migration
             $table->id();
             $table->string('nilai_id', 6)->unique();
             $table->string('siswa_id', 6);
-            $table->string('Judul Kuis');
+            $table->string('judul_kuis');
             $table->integer('jumlah_soal');
             $table->integer('jumlah_benar');
             $table->integer('nilai');
-            $table->integer('saran_orangtua');
+            $table->integer('saran_orangtua')->nullable();
             $table->timestamps();
         });
     }

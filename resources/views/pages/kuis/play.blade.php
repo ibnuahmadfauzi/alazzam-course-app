@@ -27,6 +27,7 @@
                             </div>
                             <div class="card-body">
                                 <input type="hidden" name="id_soal_ke_{{ $loop->iteration }}" value="{{ $soal->id }}">
+                                <input type="hidden" name="kuis_id" value="{{ $data_kuis->id }}">
                                 <input type="hidden" name="judul_kuis" value="{{ $data_kuis->judul_kuis }}">
                                 <input type="hidden" name="siswa_id" value="{{ $_SESSION['account_id'] }}">
                                 <div class="form-check">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KuisController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NilaiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,3 +29,6 @@ Route::post('/kuis/soal/drop', [KuisController::class, 'soalDestroy']);
 Route::post('/kuis/soal/update-process', [KuisController::class, 'soalUpdate']);
 Route::post('/kuis/play', [KuisController::class, 'playKuis']);
 Route::post('/kuis/play/submit', [KuisController::class, 'playKuisSubmit']);
+
+// Routing for Nilai
+Route::get('/nilai', [NilaiController::class, 'index']);
