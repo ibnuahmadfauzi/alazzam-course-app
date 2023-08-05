@@ -21,7 +21,10 @@
                     @foreach ($data_nilai as $nilai)
                         <tr>
                             <td>{{ $nilai->judul_kuis }}</td>
-                            <td class="text-center">{{ $nilai->nilai }}</td>
+                            <td class="text-center">
+                                <div>{{ $nilai->nilai }}</div>
+                                <div style="font-size: 10px;"><span class="bg-secondary text-light px-2 rounded-1">benar {{ $nilai->jumlah_benar }} dari {{ $nilai->jumlah_soal }} soal</span></div>
+                            </td>
                         </tr>
                     @endforeach
                     <tr>

@@ -66,7 +66,7 @@
                 @endforeach
             </div>
             <div class="d-flex justify-content-center mt-4">
-                <button type="submit" class="btn btn-success">Kirim Jawaban</button>
+                <button type="submit" class="btn btn-success" id="submit-kuis">Kirim Jawaban</button>
             </div>
         </form>
         </div>

@@ -156,6 +156,8 @@ class KuisController extends Controller
                     ->join('kuis', 'kuis.id', '=', 'soal.kuis_id')
                     ->select('soal.*')
                     ->get();
+                ?>
+                <?php
                 $data_soal = $semua_soal->where('kuis_id', $data_kuis->id);
                 return view('pages.kuis.play', [
                     'data_kuis' => $data_kuis,

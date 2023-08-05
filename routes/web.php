@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\CobaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KuisController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,3 +34,9 @@ Route::post('/kuis/play/submit', [KuisController::class, 'playKuisSubmit']);
 
 // Routing for Nilai
 Route::get('/nilai', [NilaiController::class, 'index']);
+
+// Routing for Nilai
+Route::get('/siswa', [SiswaController::class, 'index']);
+Route::post('/siswa', [SiswaController::class, 'store']);
+Route::post('/siswa/drop', [SiswaController::class, 'destroy']);
+Route::post('/siswa/update', [SiswaController::class, 'update']);

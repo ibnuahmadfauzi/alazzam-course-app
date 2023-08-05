@@ -28,6 +28,14 @@
             </div>
         </div>
 
+        <div class="container-fluid mt-4 mb-2 fw-bold">
+            <div class="card">
+                <div class="card-body text-center text-secondary">
+                    @include('partials.footer-text')
+                </div>
+            </div>
+        </div>
+
         @include('partials.import-body')
     </body>
 </html>

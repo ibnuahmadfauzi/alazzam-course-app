@@ -42,7 +42,7 @@
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <form action="/kuis/play" method="POST">
+                        <form action="/kuis/play" method="POST" target="_blank" onsubmit="window.close()">
                             @csrf
                             <table class="table table-botdered">
                                 <tr>
