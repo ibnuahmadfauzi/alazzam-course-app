@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KuisController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\PengajarController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,3 +41,9 @@ Route::get('/siswa', [SiswaController::class, 'index']);
 Route::post('/siswa', [SiswaController::class, 'store']);
 Route::post('/siswa/drop', [SiswaController::class, 'destroy']);
 Route::post('/siswa/update', [SiswaController::class, 'update']);
+
+// Route for pengajar
+Route::get('/pengajar', [PengajarController::class, 'index']);
+Route::post('/pengajar', [PengajarController::class, 'store']);
+Route::post('/pengajar/drop', [PengajarController::class, 'destroy']);
+Route::post('/pengajar/update', [PengajarController::class, 'update']);

@@ -28,7 +28,7 @@
                     <a href="/nilai" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-star" aria-hidden="true"></i></span> Nilai</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-users" aria-hidden="true"></i></span> Pengajar</a>
+                    <a href="/pengajar" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-users" aria-hidden="true"></i></span> Pengajar</a>
                 </li>
                 <li class="list-group-item">
                     <a href="/siswa" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span> Siswa</a>
