@@ -149,9 +149,11 @@ class KuisController extends Controller
         session_start();
 
         $kuis = Kuis::where('id', $request->id)->get();
+        $durasi = 0;
         foreach ($kuis as $val) {
             if(Crypt::decrypt($val->password) === $request->password) {
                 $data_kuis = Kuis::firstWhere('id', $request->id);
+                $durasi = $data_kuis->durasi;
                 $semua_soal = DB::table('soal')
                     ->join('kuis', 'kuis.id', '=', 'soal.kuis_id')
                     ->select('soal.*')
@@ -163,6 +165,7 @@ class KuisController extends Controller
                 return view('pages.kuis.play', [
                     'data_kuis' => $data_kuis,
                     'data_soal' => $data_soal,
+                    'durasi'    => $durasi,
                 ]);
             }
         }

@@ -2,6 +2,12 @@
 
 @section('content')
 
+    <div class="fixed-top text-center">
+        <span class="bg-dark rounded-2 px-4 py-2 text-light fw-bold fs-4">
+            Waktu : <span id="countdown" ></span>
+        </span>
+    </div>
+
     <div class="card">
         <div class="card-body">
             <h3 class="fw-bold text-center">
@@ -9,8 +15,11 @@
             </h3>
             <h5 class="fw-bold text-center">
                 <i>~ Selamat Mengerjakan ~</i>
+                <br>
+                <span class="durasi-output"></span>
             </h5>
             <hr>
+            <input type="hidden" class="durasi" value="{{ $durasi }}">
             <form action="/kuis/play/submit" method="POST">
             @csrf
             <div class="row">
