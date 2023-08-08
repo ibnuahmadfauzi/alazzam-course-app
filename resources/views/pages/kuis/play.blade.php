@@ -25,7 +25,7 @@
             <div class="row">
                 @foreach ($data_soal as $soal)
                     <div class="col-lg-6">
-                        <div class="card">
+                        <div class="card mt-2">
                             <div class="card-header">
                                 <span class="bg-info text-light fw-bold px-3 rounded-2">
                                     Soal ke-{{ $loop->iteration }}

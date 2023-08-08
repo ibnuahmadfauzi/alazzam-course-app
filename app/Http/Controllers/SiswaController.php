@@ -27,6 +27,16 @@ class SiswaController extends Controller
         // Start session
         session_start();
 
+        $pass = $request->password;
+        $uppercase = preg_match('@[A-Z]@', $pass);
+        $lowercase = preg_match('@[a-z]@', $pass);
+        $number    = preg_match('@[0-9]@', $pass);
+        $regex = preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $pass);
+
+        if(!$uppercase || !$lowercase || !$number || !$regex || strlen($pass) <= 7){
+            return redirect('/siswa')->withErrors(['msg' => '<div class="alert alert-danger">Data siswa <strong>gagal ditambahkan! </strong>"password harus minimal 8 karakter, mengandung huruf BESAR, huruf kecil, angka, dan karakter kusus"</div>']);
+        }
+
         // Store kuis data from request
         Siswa::create([
             'siswa_id'      => 'S' . rand(00000, 99999),
@@ -49,6 +59,18 @@ class SiswaController extends Controller
 
     public function update(Request $request)
     {
+
+        $pass = $request->password;
+        $uppercase = preg_match('@[A-Z]@', $pass);
+        $lowercase = preg_match('@[a-z]@', $pass);
+        $number    = preg_match('@[0-9]@', $pass);
+        $regex = preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $pass);
+
+        if(!$uppercase || !$lowercase || !$number || !$regex || strlen($pass) <= 7){
+            return redirect('/siswa')->withErrors(['msg' => '<div class="alert alert-danger">Data siswa <strong>gagal diperbarui! </strong>"password harus minimal 8 karakter, mengandung huruf BESAR, huruf kecil, angka, dan karakter kusus"</div>']);
+        }
+
+
         Siswa::where('siswa_id', $request->siswa_id)
         ->update([
             'nama_siswa'    => $request->nama_siswa,

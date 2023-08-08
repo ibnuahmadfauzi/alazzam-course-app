@@ -31,6 +31,16 @@ class OrangtuaController extends Controller
         // Start session
         session_start();
 
+        $pass = $request->password;
+        $uppercase = preg_match('@[A-Z]@', $pass);
+        $lowercase = preg_match('@[a-z]@', $pass);
+        $number    = preg_match('@[0-9]@', $pass);
+        $regex = preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $pass);
+
+        if(!$uppercase || !$lowercase || !$number || !$regex || strlen($pass) <= 7){
+            return redirect('/siswa')->withErrors(['msg' => '<div class="alert alert-danger">Data orang tua <strong>gagal ditambahkan! </strong>"password harus minimal 8 karakter, mengandung huruf BESAR, huruf kecil, angka, dan karakter kusus"</div>']);
+        }
+
         // Store kuis data from request
         Orangtua::create([
             'orangtua_id'   => 'O' . rand(00000, 99999),
@@ -46,6 +56,15 @@ class OrangtuaController extends Controller
     public function destroy(Request $request)
     {
         Orangtua::where('orangtua_id', $request->id)->delete();
+
+        $uppercase = preg_match('@[A-Z]@', $pass);
+        $lowercase = preg_match('@[a-z]@', $pass);
+        $number    = preg_match('@[0-9]@', $pass);
+        $regex = preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $pass);
+
+        if(!$uppercase || !$lowercase || !$number || !$regex || strlen($pass) <= 7){
+            return redirect('/siswa')->withErrors(['msg' => '<div class="alert alert-danger">Data orang tua <strong>gagal diperbarui! </strong>"password harus minimal 8 karakter, mengandung huruf BESAR, huruf kecil, angka, dan karakter kusus"</div>']);
+        }
 
         // return to kuis page
         return redirect('/orangtua')->withErrors(['msg' => '<div class="alert alert-info">Data orang tua <strong>berhasil dihapus!</strong></div>']);
