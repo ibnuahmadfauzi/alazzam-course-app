@@ -155,6 +155,7 @@ class KuisController extends Controller
                 $semua_soal = DB::table('soal')
                     ->join('kuis', 'kuis.id', '=', 'soal.kuis_id')
                     ->select('soal.*')
+                    ->orderBy(DB::raw('RAND()'))
                     ->get();
                 ?>
                 <?php

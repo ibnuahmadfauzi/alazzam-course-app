@@ -36,6 +36,7 @@ Route::post('/kuis/play/submit', [KuisController::class, 'playKuisSubmit']);
 
 // Routing for Nilai
 Route::get('/nilai', [NilaiController::class, 'index']);
+Route::post('/nilai/detail', [NilaiController::class, 'nilaiDetail']);
 
 // Routing for Nilai
 Route::get('/siswa', [SiswaController::class, 'index']);

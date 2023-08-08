@@ -26,11 +26,6 @@
                             <a href="/kuis" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-list-alt" aria-hidden="true"></i></span> Kuis</a>
                         </li>
                     @endif
-                    @if ($_SESSION["account_role"] == 'administrator' || $_SESSION["account_role"] == 'siswa' || $_SESSION["account_role"] == 'pengajar')
-                        <li class="list-group-item">
-                            <a href="" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-sticky-note" aria-hidden="true"></i></span> Materi</a>
-                        </li>
-                    @endif
                     @if ($_SESSION["account_role"] == 'administrator' || $_SESSION["account_role"] == 'siswa' || $_SESSION["account_role"] == 'pengajar' || $_SESSION["account_role"] == 'orangtua')
                         <li class="list-group-item">
                             <a href="/nilai" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-star" aria-hidden="true"></i></span> Nilai</a>
