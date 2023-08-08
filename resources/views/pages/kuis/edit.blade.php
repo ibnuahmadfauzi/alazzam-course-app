@@ -71,6 +71,7 @@
                         <div class="mb-3">
                             <label for="durasi" class="form-label">Judul Kuis:</label>
                             <select class="form-select" name="durasi" aria-label="Default select example" required>
+                                <option value="1" {{ $data_kuis->durasi === 1 ? 'selected' : '' }}>1 Menit</option>
                                 <option value="10" {{ $data_kuis->durasi === 10 ? 'selected' : '' }}>10 Menit</option>
                                 <option value="30" {{ $data_kuis->durasi === 30 ? 'selected' : '' }}>30 Menit</option>
                                 <option value="60" {{ $data_kuis->durasi === 60 ? 'selected' : '' }}>60 Menit</option>

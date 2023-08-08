@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrator;
+use App\Models\Orangtua;
+use App\Models\Pengajar;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -56,6 +58,36 @@ class LoginController extends Controller
                     $_SESSION['login'] = true;
                     $_SESSION['account_role'] = 'siswa';
                     $_SESSION['account_id'] = $val->siswa_id;
+                    return redirect('/dashboard');
+                }
+            }
+        }
+
+        // get pengajar table
+        $user = Pengajar::get();
+
+        // loop pengajar table value and check login account
+        foreach($user as $val) {
+            if($request->username === $val->username) {
+                if($request->password === Crypt::decrypt($val->password)) {
+                    $_SESSION['login'] = true;
+                    $_SESSION['account_role'] = 'pengajar';
+                    $_SESSION['account_id'] = $val->pengajar_id;
+                    return redirect('/dashboard');
+                }
+            }
+        }
+
+        // get orang tua table
+        $user = Orangtua::get();
+
+        // loop orangtua table value and check login account
+        foreach($user as $val) {
+            if($request->username === $val->username) {
+                if($request->password === Crypt::decrypt($val->password)) {
+                    $_SESSION['login'] = true;
+                    $_SESSION['account_role'] = 'orangtua';
+                    $_SESSION['account_id'] = $val->orangtua_id;
                     return redirect('/dashboard');
                 }
             }

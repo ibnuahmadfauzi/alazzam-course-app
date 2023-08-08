@@ -15,27 +15,38 @@
         <hr>
         <div>
             <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="/dashboard" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-tachometer" aria-hidden="true"></i></span> Dashboard</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="/kuis" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-list-alt" aria-hidden="true"></i></span> Kuis</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-sticky-note" aria-hidden="true"></i></span> Materi</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="/nilai" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-star" aria-hidden="true"></i></span> Nilai</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-users" aria-hidden="true"></i></span> Pengajar</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span> Siswa</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-heart" aria-hidden="true"></i></span> Orang Tua</a>
-                </li>
+                @if (isset($_SESSION["account_role"]))
+                    @if ($_SESSION["account_role"] == 'administrator' || $_SESSION["account_role"] == 'siswa' || $_SESSION["account_role"] == 'pengajar' || $_SESSION["account_role"] == 'orangtua')
+                        <li class="list-group-item">
+                            <a href="/dashboard" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-tachometer" aria-hidden="true"></i></span> Dashboard</a>
+                        </li>
+                    @endif
+                    @if ($_SESSION["account_role"] == 'administrator' || $_SESSION["account_role"] == 'siswa' || $_SESSION["account_role"] == 'pengajar')
+                        <li class="list-group-item">
+                            <a href="/kuis" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-list-alt" aria-hidden="true"></i></span> Kuis</a>
+                        </li>
+                    @endif
+                    @if ($_SESSION["account_role"] == 'administrator' || $_SESSION["account_role"] == 'siswa' || $_SESSION["account_role"] == 'pengajar' || $_SESSION["account_role"] == 'orangtua')
+                        <li class="list-group-item">
+                            <a href="/nilai" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-star" aria-hidden="true"></i></span> Nilai</a>
+                        </li>
+                    @endif
+                    @if ($_SESSION["account_role"] == 'administrator')
+                        <li class="list-group-item">
+                            <a href="/pengajar" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-users" aria-hidden="true"></i></span> Pengajar</a>
+                        </li>
+                    @endif
+                    @if ($_SESSION["account_role"] == 'administrator' || $_SESSION["account_role"] == 'pengajar')
+                        <li class="list-group-item">
+                            <a href="/siswa" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span> Siswa</a>
+                        </li>
+                    @endif
+                    @if ($_SESSION["account_role"] == 'administrator' || $_SESSION["account_role"] == 'pengajar')
+                        <li class="list-group-item">
+                            <a href="/orangtua" class="text-decoration-none text-secondary"><span style="width: 20px; display: inline-block;"><i class="fa fa-heart" aria-hidden="true"></i></span> Orang Tua</a>
+                        </li>
+                    @endif
+                @endif
             </ul>
         </div>
         <hr>

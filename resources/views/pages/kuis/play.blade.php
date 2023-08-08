@@ -2,6 +2,12 @@
 
 @section('content')
 
+    <div class="fixed-top text-center">
+        <span class="bg-dark rounded-2 px-4 py-2 text-light fw-bold fs-4">
+            Waktu : <span id="countdown" ></span>
+        </span>
+    </div>
+
     <div class="card">
         <div class="card-body">
             <h3 class="fw-bold text-center">
@@ -9,14 +15,17 @@
             </h3>
             <h5 class="fw-bold text-center">
                 <i>~ Selamat Mengerjakan ~</i>
+                <br>
+                <span class="durasi-output"></span>
             </h5>
             <hr>
+            <input type="hidden" class="durasi" value="{{ $durasi }}">
             <form action="/kuis/play/submit" method="POST">
             @csrf
             <div class="row">
                 @foreach ($data_soal as $soal)
                     <div class="col-lg-6">
-                        <div class="card">
+                        <div class="card mt-2">
                             <div class="card-header">
                                 <span class="bg-info text-light fw-bold px-3 rounded-2">
                                     Soal ke-{{ $loop->iteration }}
@@ -66,7 +75,7 @@
                 @endforeach
             </div>
             <div class="d-flex justify-content-center mt-4">
-                <button type="submit" class="btn btn-success">Kirim Jawaban</button>
+                <button type="submit" class="btn btn-success" id="submit-kuis">Kirim Jawaban</button>
             </div>
         </form>
         </div>
