@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\KuisController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NilaiController;
@@ -53,3 +54,6 @@ Route::get('/orangtua', [OrangtuaController::class, 'index']);
 Route::post('/orangtua', [OrangtuaController::class, 'store']);
 Route::post('/orangtua/drop', [OrangtuaController::class, 'destroy']);
 Route::post('/orangtua/update', [OrangtuaController::class, 'update']);
+
+// Route for komentar
+Route::post('/komentar/update', [KomentarController::class, 'update']);

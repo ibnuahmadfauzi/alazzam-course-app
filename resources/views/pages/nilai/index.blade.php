@@ -9,6 +9,9 @@
                 <div></div>
             </div>
             <hr>
+            @if($errors->any())
+            {!! $errors->first() !!}
+            @endif
             <h5 class="text-center mt-5">~ Data nilai dari siswa dengan nama <b>{{ $nama_siswa->nama_siswa }}</b> ~</h5>
             <table class="table table-bordered mt-4">
                 <thead>
@@ -43,10 +46,17 @@
 
             <div class="card mt-5 mb-5">
                 <div class="card-body">
-                    <form action="">
+                    <form action="/komentar/update" method="POST">
+                        @csrf
                         <div class="text-secondary">
                             <label for="catatan_orangtua" class="form-label text-center d-block">~ Catatan Wali Siswa ~</label>
-                            <textarea name="catata_orangtua" id="catata_orangtua" rows="5" class="form-control" placeholder="Catatan wali siswa ..." {{ $_SESSION["account_role"] == "orangtua" ? "" : "disabled" }}></textarea>
+                            <textarea name="catata_orangtua" id="catata_orangtua" rows="5" class="form-control" placeholder="Catatan wali siswa ..." {{ $_SESSION["account_role"] == "orangtua" ? "" : "disabled" }}>{{ $komentar }}</textarea>
+                            @if ($_SESSION["account_role"] == "orangtua")
+                                <div class="mt-3 d-flex justify-content-center">
+                                    <input type="hidden" name="siswa_id" value="{{ $nama_siswa->siswa_id }}">
+                                    <button type="submit" class="btn btn-outline-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Simpan Komentar</button>
+                                </div>
+                            @endif
                         </div>
                     </form>
                 </div>
