@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kuis;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -15,7 +17,12 @@ class DashboardController extends Controller
         // Check if the user is logged in
         if(isset($_SESSION['login'])) {
             if($_SESSION['login']) {
-                return view('pages.dashboard.index');
+                $data_siswa = Siswa::all();
+                $data_kuis = Kuis::all();
+                return view('pages.dashboard.index', [
+                    'jumlah_siswa'  => count($data_siswa),
+                    'jumlah_kuis'   => count($data_kuis),
+                ]);
             }
         }
 
